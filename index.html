@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshtech</title>
-    <link rel="stylesheet" href="HTML.css">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="HTML.css"> <!-- Ensure this path is correct -->
 </head>
 <body>
-    <!-- Video element -->
+    <!-- Video Background -->
     <div class="video-background">
         <video id="background-video" autoplay muted loop>
             <source id="video-source" src="videoplayback.mp4" type="video/mp4">
@@ -15,16 +15,67 @@
         </video>
     </div>
 
-    <!-- Content on the page -->
-    <div class="content">
-        <h1>Welcome to My Site</h1>
-        <p>I am gonna be the king of the pirates</p>
-    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Toggle button -->
+    <!-- Toggle Button -->
     <button id="toggle-button" class="toggle-button">Modes</button>
 
-    <!-- JavaScript to handle the button click -->
+    <!-- Sections -->
+    <section id="home">
+        <div class="content">
+            <h1>Welcome to My Site</h1>
+            <p>This is some content on the page.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Write a brief introduction about yourself, your background, and what you're passionate about.</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Skill 1</li>
+            <li>Skill 2</li>
+            <li>Skill 3</li>
+            <!-- Add more skills as needed -->
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Project Title 1</h3>
+            <p>Description of the project. What was your role? What technologies did you use?</p>
+            <a href="#">View Project</a>
+        </div>
+        <div class="project">
+            <h3>Project Title 2</h3>
+            <p>Description of the project. What was your role? What technologies did you use?</p>
+            <a href="#">View Project</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out to me at [your email address] or connect with me on [social media links].</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Video Toggle -->
     <script>
         const videoElement = document.getElementById('background-video');
         const videoSource = document.getElementById('video-source');
@@ -38,7 +89,7 @@
             // Toggle the video source
             currentVideoIndex = (currentVideoIndex + 1) % videos.length;
             videoSource.src = videos[currentVideoIndex];
-            
+
             // Reload the video with the new source
             videoElement.load();
             videoElement.play();
