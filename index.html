@@ -40,14 +40,14 @@
     <section id="about">
         <h2>About Me</h2>
         <p>Hey whatsup everyone,I am Daksh student of 11th trying to improve the practical knowledge of my belovoed languages like HTML,Python.</p>
-        <p>I have some ideas regarding adding an AI in my website like an personal assistant</p>
+        <p>I have some ideas regarding adding an AI in my website like a personal assistant.</p>
     </section>
 
     <section id="skills">
         <h2>Skills</h2>
         <ul>
             <li>Pianoist</li>
-            <li>Basic Coder </li>
+            <li>Basic Coder</li>
             <!-- Add more skills as needed -->
         </ul>
     </section>
@@ -68,11 +68,11 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <p>Feel free to reach out to me at [Daksh13ff@gmail.com] or connect with me on [https://www.instagram.com/ayonakoji_daksh?igsh=aWM5Z3JqbXl5YnBo].</p>
+        <p>Feel free to reach out to me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a> or connect with me on <a href="https://www.instagram.com/ayonakoji_daksh?igsh=aWM5Z3JqbXl5YnBo" target="_blank">Instagram</a>.</p>
     </section>
 
     <footer>
-        <p>&copy; 2023 Daksh. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript for Video Toggle -->
@@ -93,7 +93,13 @@
             // Reload the video with the new source
             videoElement.load();
             videoElement.play();
+
+            // Ensure the video loops
+            videoElement.loop = true;
         });
+
+        // Set the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
