@@ -76,6 +76,15 @@
     <script>
         // Get the video element
         const videoElement = document.getElementById('background-video');
+        
+ // Play video with sound after any user interaction (scroll, click, etc.)
+        const enableSound = () => {
+            videoElement.muted = false; // Unmute video
+            videoElement.play(); // Ensure the video is playing
+        };
+        // Listen for user interaction to unmute the video
+        window.addEventListener('click', enableSound);
+        window.addEventListener('scroll', enableSound);
 
        
         // Set the current year in the footer
