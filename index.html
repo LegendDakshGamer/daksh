@@ -75,31 +75,29 @@
         <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for Video Toggle -->
-    <script> 
-        const videoElement = document.getElementById('background-video');
-        const videoSource = document.getElementById('video-source');
-        const toggleButton = document.getElementById('toggle-button');
+const videoElement = document.getElementById('background-video');
+const videoSource = document.getElementById('video-source');
+const toggleButton = document.getElementById('toggle-button');
 
-        // Array of video sources
-        const videos = ['OSvsT.mp4',];
-        let currentVideoIndex = 0;
+// Array of video sources
+const videos = ['OSvsT.mp4'];
+let currentVideoIndex = 0;
 
-        toggleButton.addEventListener('click', () => {
-            // Toggle the video source
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            videoSource.src = videos[currentVideoIndex];
+// Remove the mute setting, allowing the video to play with sound
+videoElement.muted = false;
 
-            // Reload the video with the new source
-            videoElement.load();
-            videoElement.play();
+toggleButton.addEventListener('click', () => {
+    // Toggle the video source
+    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+    videoSource.src = videos[currentVideoIndex];
 
-            // Ensure the video loops
-            videoElement.loop = true;
-        });
+    // Reload the video with the new source
+    videoElement.load();
+    videoElement.play();
+});
 
-        // Set the current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+// Set the current year in the footer
+document.getElementById('year').textContent = new Date().getFullYear();
+
 </body>
 </html>
