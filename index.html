@@ -11,7 +11,7 @@
     <!-- Video Background -->
     <div class="video-background">
         <video id="background-video" autoplay loop>
-            <source id="video-source" src="videoplayback.mp4" type="video/mp4">
+            <source id="video-source" src="OSvsT.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -75,32 +75,5 @@
     <footer>
         <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
     </footer>
-
-    <!-- JavaScript for Video Toggle -->
-    <script>
-        const videoElement = document.getElementById('background-video');
-        const videoSource = document.getElementById('video-source');
-        const toggleButton = document.getElementById('toggle-button');
-
-        // Array of video sources
-        const videos = ['videoplayback.mp4', 'OSvsT.mp4'];
-        let currentVideoIndex = 0;
-
-        toggleButton.addEventListener('click', () => {
-            // Toggle the video source
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            videoSource.src = videos[currentVideoIndex];
-
-            // Reload the video with the new source
-            videoElement.load();
-            videoElement.play();
-
-            // Ensure the video loops
-            videoElement.loop = true;
-        });
-
-        // Set the current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>
