@@ -1,4 +1,4 @@
-html, body {
+Css-->html, body {
    margin: 0;
    padding: 0;
    height: 100%;
@@ -26,6 +26,25 @@ html, body {
    height: 100%;
    object-fit: cover;
    transform: translate(-50%, -50%);
+}
+
+/* Style the toggle button */
+.toggle-button {
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
+   border: none;
+   border-radius: 5px;
+   background-color: #000000;
+   color: #ffffff;
+   position: fixed; /* Fixed position to stay on screen while scrolling */
+   top: 20px;
+   left: 20px;
+   z-index: 1;
+}
+
+.toggle-button:hover {
+   background-color: #0056b3;
 }
 
 /* Style for the content on top of the video */
@@ -76,9 +95,21 @@ html, body {
    background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Style for social media icons */
+.social-icon {
+   width: 20px;
+   height: 20px;
+   vertical-align: middle;
+   transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+   transform: scale(1.2);
+}
+
 /* Additional styles for sections (Home, About, Contact) */
 section {
-   padding: 100px 20px;
+   padding: 100px 20px; /* Existing padding for spacing */
    color: #ffffff;
    text-align: center;
    min-height: 100vh;
@@ -88,12 +119,26 @@ section {
    flex-direction: column;
 }
 
-#about, #skills, #projects, #contact {
-   background-color: rgba(0, 0, 0, 0.5);
+/* Add a top and bottom margin to create space between sections */
+section {
+   margin-top: 50px;
+   margin-bottom: 50px;
 }
 
+/* Optional: Add a subtle border or shadow between sections */
+section:not(:last-child) {
+   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
 
+/* Background color for all sections except Home */
+#about, #skills, #projects, #contact {
+   background-color: rgba(0, 0, 0, 0.5); /* Slightly darkened background for readability */
+}
 
+/* Home section remains transparent */
+#home {
+   background-color: transparent; /* No background color for Home */
+}
  
  
  
