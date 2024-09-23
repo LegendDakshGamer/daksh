@@ -28,52 +28,23 @@ html, body {
    transform: translate(-50%, -50%);
 }
 
-/* Full-Width with Underlined Links */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #222; /* Solid background color */
-    padding: 10px 0;
-    z-index: 2;
-    text-align: center;
+/* Style the toggle button */
+.toggle-button {
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
+   border: none;
+   border-radius: 5px;
+   background-color: #000000;
+   color: #ffffff;
+   position: fixed; /* Fixed position to stay on screen while scrolling */
+   top: 20px;
+   left: 20px;
+   z-index: 1;
 }
 
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar li {
-    display: inline-block;
-    margin: 0 20px;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 5px 10px;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.navbar a:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: width 0.3s ease; /* Animated underline */
-}
-
-.navbar a:hover:after {
-    width: 100%; /* Full underline on hover */
-}
-
-.navbar a:hover {
-    color: #00ffff; /* Text color change on hover */
+.toggle-button:hover {
+   background-color: #0056b3;
 }
 
 /* Style for the content on top of the video */
@@ -89,9 +60,59 @@ html, body {
    font-size: 1.2em;
 }
 
+/* Style for the navigation bar */
+.navbar {
+   position: fixed; /* Fixed position for navbar */
+   top: 0;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.7);
+   text-align: center;
+   padding: 10px 0;
+   z-index: 2;
+}
+
+.navbar ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+}
+
+.navbar li {
+   display: inline;
+   margin: 0 15px;
+}
+
+/* Updated style for rounded button-like links */
+.navbar a {
+   color: white;
+   text-decoration: none;
+   font-size: 18px;
+   padding: 10px 20px; /* Added more padding for the button-like look */
+   border-radius: 20px; /* Rounded corners for the button look */
+   background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background for button-like feel */
+   transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar a:hover {
+   background-color: rgba(255, 255, 255, 0.4); /* Brighter background on hover */
+   transform: scale(1.1); /* Slight scaling effect on hover */
+}
+
+/* Style for social media icons */
+.social-icon {
+   width: 20px;
+   height: 20px;
+   vertical-align: middle;
+   transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+   transform: scale(1.2);
+}
+
 /* Additional styles for sections (Home, About, Contact) */
 section {
-   padding: 100px 20px;
+   padding: 100px 20px; /* Existing padding for spacing */
    color: #ffffff;
    text-align: center;
    min-height: 100vh;
@@ -101,6 +122,24 @@ section {
    flex-direction: column;
 }
 
-#about, #skills, #projects, #contact {
-   background-color: rgba(0, 0, 0, 0.5);
+/* Add a top and bottom margin to create space between sections */
+section {
+   margin-top: 50px;
+   margin-bottom: 50px;
 }
+
+/* Optional: Add a subtle border or shadow between sections */
+section:not(:last-child) {
+   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Background color for all sections except Home */
+#about, #skills, #projects, #contact {
+   background-color: rgba(0, 0, 0, 0.5); /* Slightly darkened background for readability */
+}
+
+/* Home section remains transparent */
+#home {
+   background-color: transparent; /* No background color for Home */
+}
+
