@@ -28,19 +28,14 @@ html, body {
    transform: translate(-50%, -50%);
 }
 
-/* Transparent with Hover Effects */
+/* Sticky Gradient Navbar */
 .navbar {
-    position: fixed;
+    position: sticky; /* Stick to top */
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Transparent background */
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 100, 255, 0.8)); /* Gradient background */
     padding: 15px 0;
     z-index: 2;
-    transition: background-color 0.3s ease; /* Smooth transition on scroll */
-}
-
-.navbar:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Solid color on hover */
 }
 
 .navbar ul {
@@ -60,11 +55,11 @@ html, body {
     text-decoration: none;
     font-size: 18px;
     padding: 5px 10px;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Slight highlight on hover */
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
 }
 
@@ -96,5 +91,3 @@ section {
 #about, #skills, #projects, #contact {
    background-color: rgba(0, 0, 0, 0.5);
 }
-
- 
