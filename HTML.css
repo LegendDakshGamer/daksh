@@ -28,25 +28,25 @@ html, body {
    transform: translate(-50%, -50%);
 }
 
-/* Sticky Gradient Navbar */
+/* Full-Width with Underlined Links */
 .navbar {
-    position: sticky; /* Stick to top */
+    position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 100, 255, 0.8)); /* Gradient background */
-    padding: 15px 0;
+    background-color: #222; /* Solid background color */
+    padding: 10px 0;
     z-index: 2;
-}
-
-.navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     text-align: center;
 }
 
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .navbar li {
-    display: inline;
+    display: inline-block;
     margin: 0 20px;
 }
 
@@ -55,12 +55,25 @@ html, body {
     text-decoration: none;
     font-size: 18px;
     padding: 5px 10px;
-    transition: background-color 0.3s ease;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar a:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease; /* Animated underline */
+}
+
+.navbar a:hover:after {
+    width: 100%; /* Full underline on hover */
 }
 
 .navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
+    color: #00ffff; /* Text color change on hover */
 }
 
 /* Style for the content on top of the video */
