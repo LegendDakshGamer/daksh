@@ -28,6 +28,17 @@ html, body {
    transform: translate(-50%, -50%);
 }
 
+/* Add a soft overlay on the video background */
+.video-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.5); /* Darker overlay */
+   z-index: 0; /* Behind content but over video */
+}
+
 /* Style the toggle button */
 .toggle-button {
    padding: 10px 20px;
@@ -58,6 +69,7 @@ html, body {
    padding: 20px;
    z-index: 1;
    font-size: 1.2em;
+   animation: fadeIn 1.5s ease-in-out; /* Fade-in animation */
 }
 
 /* Style for the navigation bar */
@@ -82,20 +94,17 @@ html, body {
    margin: 0 15px;
 }
 
-/* Updated style for rounded button-like links */
 .navbar a {
    color: white;
    text-decoration: none;
    font-size: 18px;
-   padding: 10px 20px; /* Added more padding for the button-like look */
-   border-radius: 20px; /* Rounded corners for the button look */
-   background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background for button-like feel */
-   transition: background-color 0.3s ease, transform 0.3s ease;
+   padding: 5px 10px;
+   border-radius: 3px;
+   transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-   background-color: rgba(255, 255, 255, 0.4); /* Brighter background on hover */
-   transform: scale(1.1); /* Slight scaling effect on hover */
+   background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Style for social media icons */
@@ -120,6 +129,7 @@ section {
    justify-content: center;
    align-items: center;
    flex-direction: column;
+   animation: fadeIn 1s ease-in-out; /* Fade-in animation */
 }
 
 /* Add a top and bottom margin to create space between sections */
@@ -143,3 +153,25 @@ section:not(:last-child) {
    background-color: transparent; /* No background color for Home */
 }
 
+/* Fade-in animation */
+@keyframes fadeIn {
+   from { opacity: 0; }
+   to { opacity: 1; }
+}
+
+/* CTA Button Style */
+.cta-button {
+   padding: 15px 30px;
+   font-size: 18px;
+   background-color: #0056b3;
+   color: white;
+   border: none;
+   border-radius: 50px;
+   cursor: pointer;
+   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+   background-color: #003d80;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
