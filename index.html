@@ -14,9 +14,10 @@
             <source id="video-source" src="OSvsT.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <!-- Video Overlay to enhance contrast with text -->
-        <div class="video-overlay"></div>
     </div>
+
+    <!-- Mute/Unmute Button -->
+    <button id="mute-button" class="mute-button">Unmute</button>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -32,17 +33,15 @@
     <!-- Sections -->
     <section id="home">
         <div class="content">
-            <h1>Welcome to My Site</h1>
-            <p>Discover my projects, skills, and more!</p>
-            <!-- CTA button example -->
-            <button class="cta-button">Get Started</button>
+            <h1>Welcome to My Dynamic Site</h1>
+            <p>Your one-stop portfolio!</p>
+            <a href="#about" class="cta-button">Learn More</a>
         </div>
     </section>
 
     <section id="about">
         <h2>About Me</h2>
-        <p>Hey whatsup everyone, I am Daksh, a student of 11th trying to improve the practical knowledge of my beloved languages like HTML and Python.</p>
-        <p>I have some ideas regarding adding an AI to my website like a personal assistant.</p>
+        <p>I'm Daksh, a student passionate about learning coding and technology.</p>
     </section>
 
     <section id="skills">
@@ -56,12 +55,12 @@
     <section id="projects">
         <h2>Projects</h2>
         <div class="project">
-            <h3>Project Title 1</h3>
+            <h3>Project 1</h3>
             <p>Coming soon!!</p>
             <a href="#">View Project</a>
         </div>
         <div class="project">
-            <h3>Project Title 2</h3>
+            <h3>Project 2</h3>
             <p>Coming soon!!</p>
             <a href="#">View Project</a>
         </div>
@@ -69,7 +68,12 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <p>Feel free to reach out to me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a> or connect with me on <a href="https://www.instagram.com/ayonakoji_daksh?igsh=aWM5Z3JqbXl5YnBo" target="_blank">Instagram</a>.</p>
+        <p>Email me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a>.</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/ayonakoji_daksh" target="_blank">
+                <img src="instagram-icon.png" alt="Instagram">
+            </a>
+        </div>
     </section>
 
     <footer>
@@ -78,20 +82,23 @@
 
     <!-- JavaScript -->
     <script>
-        // Get the video element
+        // Mute/Unmute video
         const videoElement = document.getElementById('background-video');
-        
-        // Play video with sound after any user interaction (scroll, click, etc.)
-        const enableSound = () => {
-            videoElement.muted = false; // Unmute video
-            videoElement.play(); // Ensure the video is playing
-        };
-        // Listen for user interaction to unmute the video
-        window.addEventListener('click', enableSound);
-        window.addEventListener('scroll', enableSound);
+        const muteButton = document.getElementById('mute-button');
+
+        muteButton.addEventListener('click', () => {
+            if (videoElement.muted) {
+                videoElement.muted = false;
+                muteButton.textContent = 'Mute';
+            } else {
+                videoElement.muted = true;
+                muteButton.textContent = 'Unmute';
+            }
+        });
 
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
+
