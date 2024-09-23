@@ -10,7 +10,7 @@
 <body>
     <!-- Video Background -->
     <div class="video-background">
-        <video id="background-video" autoplay muted>
+        <video id="background-video" autoplay muted loop>
             <source id="video-source" src="OSvsT.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -31,12 +31,14 @@
     <section id="home">
         <div class="content">
             <h1>Welcome to My Site</h1>
+            <p></p>
         </div>
     </section>
 
     <section id="about">
         <h2>About Me</h2>
         <p>Hey whatsup everyone, I am Daksh, a student of 11th trying to improve the practical knowledge of my beloved languages like HTML and Python.</p>
+        <p>I have some ideas regarding adding an AI to my website like a personal assistant.</p>
     </section>
 
     <section id="skills">
@@ -75,14 +77,7 @@
         // Get the video element
         const videoElement = document.getElementById('background-video');
         
-        // Function to handle what happens when the video ends
-        videoElement.addEventListener('ended', () => {
-            // Change the background to a GIF after the video ends
-            document.querySelector('.video-background').style.backgroundImage = "url('background.gif')"; // Replace 'background.gif' with your actual GIF path
-            document.querySelector('.video-background').innerHTML = ''; // Remove the video element after it ends
-        });
-
-        // Play video with sound after any user interaction (scroll, click, etc.)
+ // Play video with sound after any user interaction (scroll, click, etc.)
         const enableSound = () => {
             videoElement.muted = false; // Unmute video
             videoElement.play(); // Ensure the video is playing
@@ -91,9 +86,9 @@
         window.addEventListener('click', enableSound);
         window.addEventListener('scroll', enableSound);
 
+       
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
-
