@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DakshTech</title>
+    <title>Dakshtech</title>
     <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="stylesheet" href="HTML.css">
 </head>
@@ -18,35 +18,27 @@
 
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="#home">DakshTech</a>
-        </div>
-        <ul class="nav-links">
+        <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
     </nav>
 
     <!-- Sections -->
     <section id="home">
         <div class="content">
-            <h1>Welcome to My Dynamic Site</h1>
-            <p>Your one-stop portfolio!</p>
-            <a href="#about" class="cta-button">Learn More</a>
+            <h1>Welcome to My Site</h1>
+            <p>Let's make something awesome together!</p>
         </div>
     </section>
 
     <section id="about">
         <h2>About Me</h2>
-        <p>I'm Daksh, a student passionate about learning coding and technology.</p>
+        <p>Hey whatsup everyone, I am Daksh, a student of 11th trying to improve the practical knowledge of my beloved languages like HTML and Python.</p>
+        <p>I have some ideas regarding adding an AI to my website like a personal assistant.</p>
     </section>
 
     <section id="skills">
@@ -60,12 +52,12 @@
     <section id="projects">
         <h2>Projects</h2>
         <div class="project">
-            <h3>Project 1</h3>
+            <h3>Project Title 1</h3>
             <p>Coming soon!!</p>
             <a href="#">View Project</a>
         </div>
         <div class="project">
-            <h3>Project 2</h3>
+            <h3>Project Title 2</h3>
             <p>Coming soon!!</p>
             <a href="#">View Project</a>
         </div>
@@ -73,12 +65,7 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <p>Email me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a>.</p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/ayonakoji_daksh" target="_blank">
-                <img src="instagram-icon.png" alt="Instagram">
-            </a>
-        </div>
+        <p>Feel free to reach out to me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a> or connect with me on <a href="https://www.instagram.com/ayonakoji_daksh?igsh=aWM5Z3JqbXl5YnBo" target="_blank">Instagram</a>.</p>
     </section>
 
     <footer>
@@ -87,31 +74,20 @@
 
     <!-- JavaScript -->
     <script>
-        // Mute/Unmute video
+        // Get the video element
         const videoElement = document.getElementById('background-video');
-        const muteButton = document.getElementById('mute-button');
 
-        muteButton.addEventListener('click', () => {
-            if (videoElement.muted) {
-                videoElement.muted = false;
-                muteButton.textContent = 'Mute';
-            } else {
-                videoElement.muted = true;
-                muteButton.textContent = 'Unmute';
-            }
-        });
+        // Play video with sound after any user interaction (scroll, click, etc.)
+        const enableSound = () => {
+            videoElement.muted = false; // Unmute video
+            videoElement.play(); // Ensure the video is playing
+        };
+        // Listen for user interaction to unmute the video
+        window.addEventListener('click', enableSound);
+        window.addEventListener('scroll', enableSound);
 
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Burger menu toggle for small screens
-        const burger = document.querySelector('.burger');
-        const navLinks = document.querySelector('.nav-links');
-
-        burger.addEventListener('click', () => {
-            navLinks.classList.toggle('nav-active');
-            burger.classList.toggle('toggle');
-        });
     </script>
 </body>
 </html>
