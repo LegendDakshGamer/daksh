@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshtech</title>
+    <title>DakshTech</title>
     <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="stylesheet" href="HTML.css">
 </head>
@@ -16,18 +16,23 @@
         </video>
     </div>
 
-    <!-- Mute/Unmute Button -->
-    <button id="mute-button" class="mute-button">Unmute</button>
-
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <ul>
+        <div class="logo">
+            <a href="#home">DakshTech</a>
+        </div>
+        <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
     </nav>
 
     <!-- Sections -->
@@ -98,7 +103,15 @@
 
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Burger menu toggle for small screens
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+        });
     </script>
 </body>
 </html>
-
