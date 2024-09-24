@@ -1,129 +1,110 @@
-/* General styling */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    scroll-behavior: smooth;
-}
+/* Existing CSS stays the same above */
 
-/* Styles for video background */
-.video-background {
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7); /* Transparent black */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-.video-background video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-}
-
-.video-background::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Dark overlay for better readability */
-    z-index: 0;
-}
-
-/* Navigation Bar */
-.navbar {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(51,51,51,0.8) 100%);
-    padding: 15px 0;
-    text-align: center;
     z-index: 2;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #08f7fe;
+    text-shadow: 0 0 10px #08f7fe, 0 0 20px #08f7fe;
 }
 
-.navbar li {
-    display: inline;
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
     margin: 0 15px;
 }
 
-.navbar a {
-    color: white;
+.nav-links li a {
     text-decoration: none;
-    font-size: 20px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: color 0.3s ease;
 }
 
-.navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffcc00;
-}
-
-/* Style for the content on top of the video */
-.content {
+.nav-links li a:before {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
-    z-index: 1;
-    font-size: 1.5em;
+    width: 100%;
+    height: 2px;
+    background-color: #08f7fe;
+    top: 100%;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
-/* Additional styling for sections */
-h2 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #ffcc00;
+.nav-links li a:hover {
+    color: #08f7fe;
 }
 
-section {
-    padding: 100px 20px;
-    color: #ffffff;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: opacity 1s ease-in-out;
-    opacity: 0;
+.nav-links li a:hover:before {
+    transform: scaleX(1);
 }
 
-section:target {
-    opacity: 1;
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
 }
 
-#about, #skills, #projects, #contact {
-    background-color: rgba(0, 0, 0, 0.5);
+.hamburger div {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
 }
 
-/* Button styling */
-.toggle-button:hover {
-    background-color: #ffcc00;
-    color: #000;
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.open div:nth-child(1) {
+        transform: rotate(45deg) translateY(10px);
+    }
+
+    .hamburger.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10px);
+    }
 }
 
-.social-icon:hover {
-    transform: scale(1.2);
-}
+/* Rest of your existing styles */
