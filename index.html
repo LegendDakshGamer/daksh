@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,14 +16,14 @@
         </video>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- New Smooth Scrolling Navigation Bar -->
     <nav class="navbar">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="active">Home</a><div class="active-link-indicator"></div></li>
+            <li><a href="#about">About</a><div class="active-link-indicator"></div></li>
+            <li><a href="#skills">Skills</a><div class="active-link-indicator"></div></li>
+            <li><a href="#projects">Projects</a><div class="active-link-indicator"></div></li>
+            <li><a href="#contact">Contact</a><div class="active-link-indicator"></div></li>
         </ul>
     </nav>
 
@@ -32,7 +31,6 @@
     <section id="home">
         <div class="content">
             <h1>Welcome to My Site</h1>
-            <p></p>
         </div>
     </section>
 
@@ -55,12 +53,10 @@
         <div class="project">
             <h3>Project Title 1</h3>
             <p>Coming soon!!</p>
-            <a href="#">View Project</a>
         </div>
         <div class="project">
             <h3>Project Title 2</h3>
             <p>Coming soon!!</p>
-            <a href="#">View Project</a>
         </div>
     </section>
 
@@ -73,12 +69,11 @@
         <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Get the video element
         const videoElement = document.getElementById('background-video');
         
- // Play video with sound after any user interaction (scroll, click, etc.)
+        // Play video with sound after any user interaction (scroll, click, etc.)
         const enableSound = () => {
             videoElement.muted = false; // Unmute video
             videoElement.play(); // Ensure the video is playing
@@ -87,7 +82,29 @@
         window.addEventListener('click', enableSound);
         window.addEventListener('scroll', enableSound);
 
-       
+        // Smooth scrolling with active link highlight
+        const navLinks = document.querySelectorAll('.navbar ul li a');
+
+        window.addEventListener('scroll', () => {
+          let current = '';
+          navLinks.forEach((link) => {
+            const section = document.querySelector(link.getAttribute('href'));
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (window.pageYOffset >= sectionTop - sectionHeight / 3) {
+              current = link.getAttribute('href');
+            }
+          });
+
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === current) {
+              link.classList.add('active');
+            }
+          });
+        });
+
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
