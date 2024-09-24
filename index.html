@@ -6,6 +6,7 @@
     <title>Dakshtech</title>
     <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="stylesheet" href="HTML.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Video Background -->
@@ -16,22 +17,28 @@
         </video>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <ul>
+    <!-- Modern Neon Navigation Bar -->
+    <nav>
+        <div class="logo">NeonSite</div>
+        <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </nav>
 
-    <!-- Sections -->
+    <!-- Sections (remain the same) -->
     <section id="home">
         <div class="content">
             <h1>Welcome to My Site</h1>
-            <p>Let's make something awesome together!</p>
+            <p></p>
         </div>
     </section>
 
@@ -74,15 +81,21 @@
 
     <!-- JavaScript -->
     <script>
-        // Get the video element
-        const videoElement = document.getElementById('background-video');
+        // Hamburger Menu Toggle
+        const navLinks = document.querySelector('.nav-links');
+        const hamburger = document.querySelector('.hamburger');
 
-        // Play video with sound after any user interaction (scroll, click, etc.)
+        function toggleMenu() {
+            navLinks.classList.toggle('show');
+            hamburger.classList.toggle('open');
+        }
+
+        // Enable sound after interaction
+        const videoElement = document.getElementById('background-video');
         const enableSound = () => {
-            videoElement.muted = false; // Unmute video
-            videoElement.play(); // Ensure the video is playing
+            videoElement.muted = false; 
+            videoElement.play(); 
         };
-        // Listen for user interaction to unmute the video
         window.addEventListener('click', enableSound);
         window.addEventListener('scroll', enableSound);
 
