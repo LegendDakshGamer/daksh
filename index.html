@@ -9,12 +9,10 @@
 </head>
 <body>
 
-    <!-- Cosmos Loading Screen -->
-    <div class="loading-screen">
-        <h1 class="cosmos-logo">COSMOS</h1>
-        <div class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-        </div>
+    <!-- Cosmos-inspired Animated Screen -->
+    <div class="cosmos-animation">
+        <h1 class="cosmos-title">Explore The Cosmos</h1>
+        <p class="cosmos-subtitle">Discover ideas beyond boundaries.</p>
     </div>
 
     <!-- Video Background -->
@@ -25,7 +23,7 @@
         </video>
     </div>
 
-    <!-- New Smooth Scrolling Navigation Bar -->
+    <!-- Smooth Scrolling Navigation Bar -->
     <nav class="navbar">
         <ul>
             <li><a href="#home" class="active">Home</a><div class="active-link-indicator"></div></li>
@@ -79,33 +77,27 @@
     </footer>
 
     <script>
-        // Get the video element
+        // Play video with sound after user interaction
         const videoElement = document.getElementById('background-video');
-        
-        // Play video with sound after any user interaction (scroll, click, etc.)
         const enableSound = () => {
-            videoElement.muted = false; // Unmute video
-            videoElement.play(); // Ensure the video is playing
+            videoElement.muted = false; 
+            videoElement.play();
         };
-        // Listen for user interaction to unmute the video
         window.addEventListener('click', enableSound);
         window.addEventListener('scroll', enableSound);
 
         // Smooth scrolling with active link highlight
         const navLinks = document.querySelectorAll('.navbar ul li a');
-
         window.addEventListener('scroll', () => {
           let current = '';
           navLinks.forEach((link) => {
             const section = document.querySelector(link.getAttribute('href'));
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-
             if (window.pageYOffset >= sectionTop - sectionHeight / 3) {
               current = link.getAttribute('href');
             }
           });
-
           navLinks.forEach((link) => {
             link.classList.remove('active');
             if (link.getAttribute('href') === current) {
@@ -117,18 +109,9 @@
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Loading screen fade out
+        // Cosmos-like animation on load
         window.addEventListener('load', () => {
-            const loadingScreen = document.querySelector('.loading-screen');
-            const content = document.querySelector('.content');
-
-            setTimeout(() => {
-                loadingScreen.style.opacity = '0';  // Fade out the loading screen
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
-                    content.style.display = 'block';      // Show the content
-                }, 1000);
-            }, 3000); // Keep the loading screen for 3 seconds
+            document.querySelector('.cosmos-animation').classList.add('start');
         });
     </script>
 </body>
