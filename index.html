@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dakshtech</title>
     <link rel="icon" type="image/png" href="Favicon.png">
-    <link rel="stylesheet" href="HTML.css">
+    <link rel="stylesheet" href="ytcss.css"> <!-- Updated CSS linked -->
 </head>
 <body>
 
-    <!-- Cosmos Loading Screen (No changes made) -->
+    <!-- Existing Loading Screen (No changes here) -->
     <div class="loading-screen">
         <h1 class="cosmos-logo">Endless Realities</h1>
         <div class="loading-dots">
@@ -17,26 +17,26 @@
         </div>
     </div>
 
-    <!-- Alex Style Background and Navbar -->
+    <!-- Image Background (from your original code) -->
     <div class="image-background">
-        <img src="main.jpg" alt="Background Image">
+        <img src="new.jpg" alt="Background Image">
     </div>
 
-    <!-- Navbar from Alex's Style -->
+    <!-- New Smooth Scrolling Navigation Bar (Alex's style) -->
     <nav class="navbar">
         <ul>
-            <li><a href="#home" class="active">Home</a><div class="active-link-indicator"></div></li>
-            <li><a href="#about">About</a><div class="active-link-indicator"></div></li>
-            <li><a href="#skills">Skills</a><div class="active-link-indicator"></div></li>
-            <li><a href="#projects">Projects</a><div class="active-link-indicator"></div></li>
-            <li><a href="#contact">Contact</a><div class="active-link-indicator"></div></li>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Sections with Alex's Layout and Animations -->
+    <!-- Sections from your original content, displayed with Alex's style -->
     <section id="home">
         <div class="content">
-            <h1>Welcome to My Site</h1>
+            <h1>Welcome to Dakshtech</h1>
         </div>
     </section>
 
@@ -75,8 +75,8 @@
         <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts for smooth scroll and section highlight -->
     <script>
+        // Smooth scrolling with active link highlight
         const navLinks = document.querySelectorAll('.navbar ul li a');
 
         window.addEventListener('scroll', () => {
@@ -102,22 +102,21 @@
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Loading screen fade out
+        // Loading screen fade out (from your original code)
         window.addEventListener('load', () => {
             const loadingScreen = document.querySelector('.loading-screen');
             const content = document.querySelector('.content');
 
             setTimeout(() => {
-                loadingScreen.style.transition = 'opacity 2.5s ease';  // Slow fade-out effect over 2.5 seconds
-                loadingScreen.style.opacity = '0';  // Fade out the loading screen
+                loadingScreen.style.transition = 'opacity 2.5s ease';
+                loadingScreen.style.opacity = '0';
                 setTimeout(() => {
-                    loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
-                    content.style.transition = 'opacity 2s ease';  // Slow fade-in effect for the content
-                    content.style.opacity = '1';  // Show the content
-                }, 2500);  // Allow the fade-out to complete before removing the loading screen (2.5 seconds)
-            }, 2000);  // Initial delay of 2 seconds before starting the fade-out
+                    loadingScreen.style.display = 'none';
+                    content.style.transition = 'opacity 2s ease';
+                    content.style.opacity = '1';
+                }, 2500);
+            }, 2000);
         });
     </script>
-
 </body>
 </html>
