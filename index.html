@@ -113,13 +113,16 @@
             const content = document.querySelector('.content');
 
             setTimeout(() => {
+                loadingScreen.style.transition = 'opacity 2.5s ease';  // Slow fade-out effect over 2.5 seconds
                 loadingScreen.style.opacity = '0';  // Fade out the loading screen
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
-                    content.style.display = 'block';      // Show the content
-                }, 1000);
-            }, 3000); // Keep the loading screen for 3 seconds
+                    content.style.transition = 'opacity 2s ease';  // Slow fade-in effect for the content
+                    content.style.opacity = '1';  // Show the content
+                }, 2500);  // Allow the fade-out to complete before removing the loading screen (2.5 seconds)
+            }, 2000);  // Initial delay of 2 seconds before starting the fade-out
         });
     </script>
+
 </body>
 </html>
