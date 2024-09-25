@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="HTML.css">
 </head>
 <body>
+
+    <!-- Cosmos Loading Screen -->
+    <div class="loading-screen">
+        <h1 class="cosmos-logo">COSMOS</h1>
+        <div class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+        </div>
+    </div>
+
     <!-- Video Background -->
     <div class="video-background">
         <video id="background-video" autoplay muted loop>
@@ -107,6 +116,20 @@
 
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Loading screen fade out
+        window.addEventListener('load', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const content = document.querySelector('.content');
+
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';  // Fade out the loading screen
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
+                    content.style.display = 'block';      // Show the content
+                }, 1000);
+            }, 3000); // Keep the loading screen for 3 seconds
+        });
     </script>
 </body>
 </html>
