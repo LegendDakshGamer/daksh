@@ -3,72 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshtech</title>
+    <title>Realities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="stylesheet" href="HTML.css">
 </head>
 <body>
 
-    <!-- Cosmos Loading Screen -->
+    <!-- Existing Loading Screen (No changes here) -->
     <div class="loading-screen">
         <h1 class="cosmos-logo">Endless Realities</h1>
         <div class="loading-dots">
             <span>.</span><span>.</span><span>.</span>
         </div>
     </div>
+<header>
+    <!-- New Smooth Scrolling Navigation Bar (Alex's style) -->
+    <a href="#" class="logo">Daksh</a>
 
-    <!-- Image Background -->
-    <div class="image-background">
-        <img src="new.jpg" alt="Background Image">
-    </div>
-
-    <!-- New Smooth Scrolling Navigation Bar -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="#home" class="active">Home</a><div class="active-link-indicator"></div></li>
-            <li><a href="#about">About</a><div class="active-link-indicator"></div></li>
-            <li><a href="#skills">Skills</a><div class="active-link-indicator"></div></li>
-            <li><a href="#projects">Projects</a><div class="active-link-indicator"></div></li>
-            <li><a href="#contact">Contact</a><div class="active-link-indicator"></div></li>
-        </ul>
+    <nav>
+        <a href="#" class="active"> Home</a>
+        <a href="#" >Services</a>
+        <a href="#" >Skills</a>
+        <a href="#" >Education</a>
+        <a href="#" >Experience</a>
+        <a href="#" >Contact</a>
     </nav>
+</header>
 
-    <!-- Sections -->
-    <section id="home">
-        <div class="content">
-            <h1>Welcome to My Site</h1>
+    <!-- Sections from your original content, displayed with Alex's style -->
+    <section class="home">
+        <div class="home-img">
+            <img src="images.jpeg" alt="">
         </div>
-    </section>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hey whatsup everyone, I am Daksh, a student of 11th trying to improve the practical knowledge of my beloved languages like HTML and Python.</p>
-        <p>I have some ideas regarding adding an AI to my website like a personal assistant.</p>
-    </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Pianist</li>
-            <li>Basic Coder</li>
-        </ul>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Title 1</h3>
-            <p>Coming soon!!</p>
+        <div class="home-content">
+            <h1>Hi, It's <span>Daksh</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.</p>
+            <div class="social-icons">
+                <a href="https://github.com/LegendDakshGamer"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/ayonakoji_daksh/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#" class="btn">Contact Me</a>
         </div>
-        <div class="project">
-            <h3>Project Title 2</h3>
-            <p>Coming soon!!</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out to me at <a href="mailto:Daksh13ff@gmail.com">Daksh13ff@gmail.com</a> or connect with me on <a href="https://www.instagram.com/ayonakoji_daksh?igsh=aWM5Z3JqbXl5YnBo" target="_blank">Instagram</a>.</p>
     </section>
 
     <footer>
@@ -76,10 +53,28 @@
     </footer>
 
     <script>
-        // Get the video element (commented out for future use)
-        // const videoElement = document.getElementById('background-video');
 
-        // Smooth scrolling with active link highlight
+        // Set the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Loading screen fade out (from your original code)
+        window.addEventListener('load', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const content = document.querySelector('.content');
+
+            setTimeout(() => {
+                loadingScreen.style.transition = 'opacity 2.5s ease';
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    content.style.transition = 'opacity 2s ease';
+                    content.style.opacity = '1';
+                }, 2500);
+            }, 2000);
+        });
+    </script>
+</body>
+<!--   // Smooth scrolling with active link highlight
         const navLinks = document.querySelectorAll('.navbar ul li a');
 
         window.addEventListener('scroll', () => {
@@ -100,27 +95,5 @@
               link.classList.add('active');
             }
           });
-        });
-
-        // Set the current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Loading screen fade out
-        window.addEventListener('load', () => {
-            const loadingScreen = document.querySelector('.loading-screen');
-            const content = document.querySelector('.content');
-
-            setTimeout(() => {
-                loadingScreen.style.transition = 'opacity 2.5s ease';  // Slow fade-out effect over 2.5 seconds
-                loadingScreen.style.opacity = '0';  // Fade out the loading screen
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
-                    content.style.transition = 'opacity 2s ease';  // Slow fade-in effect for the content
-                    content.style.opacity = '1';  // Show the content
-                }, 2500);  // Allow the fade-out to complete before removing the loading screen (2.5 seconds)
-            }, 2000);  // Initial delay of 2 seconds before starting the fade-out
-        });
-    </script>
-
-</body>
+        });-->
 </html>
