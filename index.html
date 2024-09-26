@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dakshtech</title>
     <link rel="icon" type="image/png" href="Favicon.png">
-    <link rel="stylesheet" href="HTML.css"> <!-- Updated CSS linked -->
+    <link rel="stylesheet" href="HTML.css">
 </head>
 <body>
 
-    <!-- Existing Loading Screen (No changes here) -->
+    <!-- Cosmos Loading Screen -->
     <div class="loading-screen">
         <h1 class="cosmos-logo">Endless Realities</h1>
         <div class="loading-dots">
@@ -17,26 +17,26 @@
         </div>
     </div>
 
-    <!-- Image Background (from your original code) -->
+    <!-- Image Background -->
     <div class="image-background">
-        <img src="main.jpg" alt="Background Image">
+        <img src="new.jpg" alt="Background Image">
     </div>
 
-    <!-- New Smooth Scrolling Navigation Bar (Alex's style) -->
+    <!-- New Smooth Scrolling Navigation Bar -->
     <nav class="navbar">
         <ul>
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="active">Home</a><div class="active-link-indicator"></div></li>
+            <li><a href="#about">About</a><div class="active-link-indicator"></div></li>
+            <li><a href="#skills">Skills</a><div class="active-link-indicator"></div></li>
+            <li><a href="#projects">Projects</a><div class="active-link-indicator"></div></li>
+            <li><a href="#contact">Contact</a><div class="active-link-indicator"></div></li>
         </ul>
     </nav>
 
-    <!-- Sections from your original content, displayed with Alex's style -->
+    <!-- Sections -->
     <section id="home">
         <div class="content">
-            <h1>Welcome to Dakshtech</h1>
+            <h1>Welcome to My Site</h1>
         </div>
     </section>
 
@@ -76,6 +76,9 @@
     </footer>
 
     <script>
+        // Get the video element (commented out for future use)
+        // const videoElement = document.getElementById('background-video');
+
         // Smooth scrolling with active link highlight
         const navLinks = document.querySelectorAll('.navbar ul li a');
 
@@ -102,21 +105,22 @@
         // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Loading screen fade out (from your original code)
+        // Loading screen fade out
         window.addEventListener('load', () => {
             const loadingScreen = document.querySelector('.loading-screen');
             const content = document.querySelector('.content');
 
             setTimeout(() => {
-                loadingScreen.style.transition = 'opacity 2.5s ease';
-                loadingScreen.style.opacity = '0';
+                loadingScreen.style.transition = 'opacity 2.5s ease';  // Slow fade-out effect over 2.5 seconds
+                loadingScreen.style.opacity = '0';  // Fade out the loading screen
                 setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                    content.style.transition = 'opacity 2s ease';
-                    content.style.opacity = '1';
-                }, 2500);
-            }, 2000);
+                    loadingScreen.style.display = 'none';  // Remove loading screen after fade-out
+                    content.style.transition = 'opacity 2s ease';  // Slow fade-in effect for the content
+                    content.style.opacity = '1';  // Show the content
+                }, 2500);  // Allow the fade-out to complete before removing the loading screen (2.5 seconds)
+            }, 2000);  // Initial delay of 2 seconds before starting the fade-out
         });
     </script>
+
 </body>
 </html>
