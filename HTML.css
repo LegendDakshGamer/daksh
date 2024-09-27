@@ -1,308 +1,231 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-/* Part related to the page*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    font-family: 'Poppins', sans-serif;
-}
-html{
-    font-size: 62.5%;
-} 
-body{
-    width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    background-color: black;
-    color: white;
-}
-header{
-    margin-top: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 9%;
-    background-color: transparent;
-    filter: drop-shadow(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="Favicon.png">
+    <link rel="stylesheet" href="HTML.css">
 
-/* Loading Screen*/
-.loading-screen {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #000;
-    color: white;
-    z-index: 9999;
-}
+    <style>
+        /* Header and Navigation Animation */
+        header {
+            opacity: 0;
+            animation: fadeInTop 1.5s ease-out forwards;
+        }
 
-.cosmos-logo {
-    font-size: 3rem;
-    opacity: 0;
-    animation: fadeIn 2s ease-in-out forwards;
-}
-/*-------<>--------*//*-------<>--------*//*-------<>--------*/
+        nav a {
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInLink 1s ease-out forwards;
+        }
 
-/* Part related to "ENdless Realitly dots etc*/
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.5s; }
+        nav a:nth-child(3) { animation-delay: 0.7s; }
+        nav a:nth-child(4) { animation-delay: 0.9s; }
+        nav a:nth-child(5) { animation-delay: 1.1s; }
+        nav a:nth-child(6) { animation-delay: 1.3s; }
 
-.loading-dots span {
-    display: inline-block;
-    font-size: 2rem;
-    opacity: 0;
-    animation: dots 1.5s infinite;
-}
+        /* Home Section Animations */
+        .home-img {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1.5s ease-out forwards;
+            animation-delay: 1.5s;
+        }
 
-.loading-dots span:nth-child(1) { animation-delay: 0s; }
-.loading-dots span:nth-child(2) { animation-delay: 0.3s; }
-.loading-dots span:nth-child(3) { animation-delay: 0.6s; }
+        .home-content h1, .home-content h3, .home-content p, .social-icons, .btn {
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
 
-@keyframes dots {
-    0%, 20% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
-}
-/*-------<>--------*//*-------<>--------*//*-------<>--------*/
-.logo{
-    font-size: 3rem;
-    color: #22f5a0;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.5s ease;
-}
+        .home-content h1 { animation-delay: 1.6s; }
+        .home-content h3 { animation-delay: 1.8s; }
+        .home-content p { animation-delay: 2s; }
+        .social-icons { animation-delay: 2.2s; }
+        .btn { animation-delay: 2.4s; }
 
-.logo:hover{
-    transform: scale(1.1);
-}
+        /* Keyframes for animations */
+        @keyframes fadeInTop {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-nav a{
-    font-size: 1.8rem;
-    color: white;
-    margin-left: 4rem;
-    font-weight: 500;
-    transition: 0.3s ease;
-    border-bottom: 3px solid transparent;
-}
+        @keyframes fadeInLink {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-nav a:hover,
-nav a.active{
-    color: #22f5a0;
-    border-bottom: 3px solid #22f5a0;
-}
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-@media(max-width:995px){
-    nav{
-        position: absolute;
-        display: none;
-        top: 0;
-        right: 0;
-        width: 40%;
-        border-left: 3px solid #22f5a0;
-        border-bottom: 3px solid #22f5a0;
-        border-bottom-left-radius: 2rem;
-        padding: 1rem solid;
-        background-color: #161616;
-        border-top: 0.1rem solid rgba(0,0,0,0.1);
-    }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-    nav.active{
-        display: block;
-    }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    nav a{
-        display: block;
-        font-size: 2rem;
-        margin: 3rem 0;
-    }
+        /* New sections style */
+        section {
+            min-height: 100vh;
+            padding: 5rem 9%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+        }
 
-    nav a:hover,
-    nav a.active{
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-bottom: 0.5rem solid #22f5a0;
-    }
-}
+        #services, #skills, #education, #experience, #contact {
+            background-color: #222;
+            color: white;
+        }
 
-section{
-    min-height: 100vh;
-    padding: 5rem 9% 5rem;
-}
+        #services h2, #skills h2, #education h2, #experience h2, #contact h2 {
+            font-size: 4rem;
+            color: #22f5a0;
+        }
 
-.home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8rem;
-    background-color: black;
-}
+        /* Slide from the left */
+        section.slide-in-left {
+            transform: translateX(-50px);
+        }
 
-.home .home-content h1{
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1.3;
-}
+        /* Slide from the right */
+        section.slide-in-right {
+            transform: translateX(50px);
+        }
 
-span{
-    color: #22f5a0;
-}
+        /* When section becomes visible, reset transformation */
+        section.active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 1s ease, transform 1s ease;
+        }
 
-.home-content h3{
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
 
-.home-content p{
-    font-size: 1.6rem;
-}
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <h1 class="cosmos-logo">Endless Realities</h1>
+        <div class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+        </div>
+    </div>
 
-.home-img{
-    border-radius: 50%;
-}
+    <header>
+        <!-- Smooth Scrolling Navigation Bar -->
+        <a href="#home" class="logo">Daksh</a>
 
-.home-img img{
-    position: relative;
-    width: 32vw;
-    border-radius: 50%;
-    box-shadow: 0 0 25px solid #22f5a0;
-    cursor: pointer;
-    transition: 0.2s linear;
-}
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-.home-img img:hover{
-    font-size: 1.8rem;
-    font-weight: 500;
-}
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-img">
+            <img src="images.jpeg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Hi, It's <span>Daksh</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>Hey there! I’m Daksh Saxena, a passionate student with a dream of becoming a Computer Science engineer...</p>
+            <div class="social-icons">
+                <a href="https://github.com/LegendDakshGamer"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/ayonakoji_daksh/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#contact" class="btn">Contact Me</a>
+        </div>
+    </section>
 
-.social-icons a{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 4rem;
-    height: 4rem;
-    background-color: transparent;
-    border: 0.2rem solid #22f5a0;
-    font-size: 2rem;
-    border-radius: 50%;
-    margin: 3rem 1.5rem 3rem 0;
-    transition: 0.3s ease;
-    color: #22f5a0;
-}
+    <!-- Services Section -->
+    <section id="services" class="slide-in-left">
+        <h2>Services</h2>
+        <p>Details about the services I offer.</p>
+    </section>
 
-.social-icons a:hover{
-    color: black;
-    transform: scale(1.3) translateY(-5px);
-    background-color: #22f5a0;
-    box-shadow: 0  0 25px #22f5a0;
-}
+    <!-- Skills Section -->
+    <section id="skills" class="slide-in-right">
+        <h2>Skills</h2>
+        <p>Details about my skills.</p>
+    </section>
 
-.btn{
-    display: inline-block;
-    padding: 1rem 2.8rem;
-    background-color: black;
-    border-radius: 4rem;
-    font-size: 1.6rem;
-    color: #22f5a0;
-    letter-spacing: 0.3rem;
-    font-weight: 600;
-    border: 2px solid #22f5a0;
-    transition: 0.3s ease;
-    cursor: pointer;
-}
+    <!-- Education Section -->
+    <section id="education" class="slide-in-left">
+        <h2>Education</h2>
+        <p>Details about my education background.</p>
+    </section>
 
-.btn:hover{
-    transform: scale3d(1.03);
-    background-color: #22f5a0;
-    color: black;
-    box-shadow: 0 0 25px #22f5a0;
-}
+    <!-- Experience Section -->
+    <section id="experience" class="slide-in-right">
+        <h2>Experience</h2>
+        <p>Details about my work experience.</p>
+    </section>
 
-.typing-text{
-    font-size: 34px;
-    font-weight: 600;
-    min-width: 280px;
-}
+    <!-- Contact Section -->
+    <section id="contact" class="slide-in-left">
+        <h2>Contact Me</h2>
+        <p>Get in touch through my contact information.</p>
+    </section>
 
-.typing-text span{
-    position: relative;
-}
+    <footer>
+        <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
+    </footer>
 
-.typing-text span::before{
-    content: "OG gamer";
-    color: #22f5a0;
-    animation: words 20s infinite;
-}
+    <script>
+        // Set the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-.typing-text span::after{
-    content: "";
-    background-color: black;
-    position: absolute;
-    width: calc(100% + 8px);
-    height: 100%;
-    border-left: 3px solid black;
-    right: -8;
-    animation: cursor 0.6s infinite;
-}
+        // Loading screen fade out
+        window.addEventListener('load', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            setTimeout(() => {
+                loadingScreen.style.transition = 'opacity 2.5s ease';
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 2500);
+            }, 2000);
+        });
 
-@keyframes cursor{
-    to{
-        border-left: 3px solid #22f5a0;
-    }
-}
+        // Intersection Observer to trigger fade-in animations on scroll
+        const sections = document.querySelectorAll('section');
 
-@keyframes words{
-    0%, 20%{
-        content: " Basic Web Developer";
-    }
-    21%, 40%{
-        content: "Developer";
-    }
-    41%, 60%{
-        content: "Student";
-    }
-    61%, 80%{
-        content: "Server owner";
-    }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
 
-}
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 
-@media (max-width: 1000px){
-    .home{
-        gap: 4rem;
-    }
-}
-
-@media(max-width:995px){
-    .home{
-        flex-direction: column;
-        margin: 5rem 4rem;
-    }
-
-    .home .home-content h3{
-        font-size: 2.5rem;
-    }
-
-    .home-content h1{
-        font-size: 5rem;
-    }
-
-    .home-img img{
-        width: 70vw;
-        margin-top: 4rem;
-    }
-}
+</body>
+</html>
