@@ -63,9 +63,56 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* New sections style */
+        section {
+            min-height: 100vh;
+            padding: 5rem 9%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+        }
+
+        #services, #skills, #education, #experience, #contact {
+            background-color: #222;
+            color: white;
+        }
+
+        #services h2, #skills h2, #education h2, #experience h2, #contact h2 {
+            font-size: 4rem;
+            color: #22f5a0;
+        }
+
+        /* Slide from the left */
+        section.slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        /* Slide from the right */
+        section.slide-in-right {
+            transform: translateX(50px);
+        }
+
+        /* When section becomes visible, reset transformation */
+        section.active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -81,36 +128,63 @@
 
     <header>
         <!-- Smooth Scrolling Navigation Bar -->
-        <a href="#" class="logo">Daksh</a>
+        <a href="#home" class="logo">Daksh</a>
 
         <nav>
-            <a href="#" class="active"> Home</a>
-            <a href="#">Services</a>
-            <a href="#">Skills</a>
-            <a href="#">Education</a>
-            <a href="#">Experience</a>
-            <a href="#">Contact</a>
+            <a href="#home" class="active">Home</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Home Section -->
-    <section class="home">
+    <section id="home" class="home">
         <div class="home-img">
             <img src="images.jpeg" alt="">
         </div>
         <div class="home-content">
             <h1>Hi, It's <span>Daksh</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
-            <p>Hey there! I’m Daksh Saxena, a passionate student with a dream of becoming a Computer Science engineer. I’ve been diving into the world of coding, exploring languages like Python, HTML, CSS, and some basic Java. When I’m not in front of the computer, you can find me at the piano, where I love expressing my creativity through music.
-This website is one of my proud achievements, showcasing my journey and projects. I’m excited to share my work with you and connect with like-minded individuals!
-
-Feel free to explore and reach out!</p>
+            <p>Hey there! I’m Daksh Saxena, a passionate student with a dream of becoming a Computer Science engineer...</p>
             <div class="social-icons">
                 <a href="https://github.com/LegendDakshGamer"><i class="fa-brands fa-github"></i></a>
                 <a href="https://www.instagram.com/ayonakoji_daksh/?hl=en"><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <a href="#" class="btn">Contact Me</a>
+            <a href="#contact" class="btn">Contact Me</a>
         </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="slide-in-left">
+        <h2>Services</h2>
+        <p>Details about the services I offer.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="slide-in-right">
+        <h2>Skills</h2>
+        <p>Details about my skills.</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="slide-in-left">
+        <h2>Education</h2>
+        <p>Details about my education background.</p>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="slide-in-right">
+        <h2>Experience</h2>
+        <p>Details about my work experience.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="slide-in-left">
+        <h2>Contact Me</h2>
+        <p>Get in touch through my contact information.</p>
     </section>
 
     <footer>
@@ -124,17 +198,32 @@ Feel free to explore and reach out!</p>
         // Loading screen fade out
         window.addEventListener('load', () => {
             const loadingScreen = document.querySelector('.loading-screen');
-            const content = document.querySelector('.content');
-
             setTimeout(() => {
                 loadingScreen.style.transition = 'opacity 2.5s ease';
                 loadingScreen.style.opacity = '0';
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                    content.style.transition = 'opacity 2s ease';
-                    content.style.opacity = '1';
                 }, 2500);
             }, 2000);
+        });
+
+        // Intersection Observer to trigger fade-in animations on scroll
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 
