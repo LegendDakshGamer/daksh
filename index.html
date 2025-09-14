@@ -1,231 +1,164 @@
-<!DOCTYPE html>
+<!-- file: index.html
+AI Reminder — Dial-based UI version (improved)
+
+Features:
+- Pick date and time from inputs
+- Enter purpose separately
+- Choose repeat (once, daily, every X hours)
+- Stores reminders in localStorage
+- Browser notifications at chosen times
+
+Usage:
+1. Save as index.html and open in Chrome/Edge/Brave
+2. Allow notifications
+3. Fill in date, time, purpose, repeat → Add Reminder
+4. See upcoming reminders list, cancel if needed
+
+Limitations:
+- Works while browser is open (background tabs OK). Cross-device push needs Firebase/service worker.
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realities</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="icon" type="image/png" href="Favicon.png">
-    <link rel="stylesheet" href="HTML.css">
-
-    <style>
-        /* Header and Navigation Animation */
-        header {
-            opacity: 0;
-            animation: fadeInTop 1.5s ease-out forwards;
-        }
-
-        nav a {
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInLink 1s ease-out forwards;
-        }
-
-        nav a:nth-child(1) { animation-delay: 0.3s; }
-        nav a:nth-child(2) { animation-delay: 0.5s; }
-        nav a:nth-child(3) { animation-delay: 0.7s; }
-        nav a:nth-child(4) { animation-delay: 0.9s; }
-        nav a:nth-child(5) { animation-delay: 1.1s; }
-        nav a:nth-child(6) { animation-delay: 1.3s; }
-
-        /* Home Section Animations */
-        .home-img {
-            opacity: 0;
-            transform: translateX(-50px);
-            animation: slideInLeft 1.5s ease-out forwards;
-            animation-delay: 1.5s;
-        }
-
-        .home-content h1, .home-content h3, .home-content p, .social-icons, .btn {
-            opacity: 0;
-            animation: fadeInUp 1.5s ease-out forwards;
-        }
-
-        .home-content h1 { animation-delay: 1.6s; }
-        .home-content h3 { animation-delay: 1.8s; }
-        .home-content p { animation-delay: 2s; }
-        .social-icons { animation-delay: 2.2s; }
-        .btn { animation-delay: 2.4s; }
-
-        /* Keyframes for animations */
-        @keyframes fadeInTop {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInLink {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* New sections style */
-        section {
-            min-height: 100vh;
-            padding: 5rem 9%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            opacity: 0;
-        }
-
-        #services, #skills, #education, #experience, #contact {
-            background-color: #222;
-            color: white;
-        }
-
-        #services h2, #skills h2, #education h2, #experience h2, #contact h2 {
-            font-size: 4rem;
-            color: #22f5a0;
-        }
-
-        /* Slide from the left */
-        section.slide-in-left {
-            transform: translateX(-50px);
-        }
-
-        /* Slide from the right */
-        section.slide-in-right {
-            transform: translateX(50px);
-        }
-
-        /* When section becomes visible, reset transformation */
-        section.active {
-            opacity: 1;
-            transform: translateX(0);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Reminder — Dial UI</title>
+  <style>
+    body{font-family:Inter,system-ui;background:linear-gradient(180deg,#0f1724 0%,#081428 100%);color:#e6eef8;margin:0;padding:20px}
+    .container{max-width:700px;margin:0 auto}
+    h1{text-align:center;margin-bottom:20px;font-size:24px}
+    .card{background:rgba(255,255,255,0.05);padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    input,select{flex:1;padding:10px;border-radius:8px;border:none;font-size:15px}
+    input[type=date],input[type=time]{background:#1e293b;color:#fff}
+    input[type=text]{background:#1e293b;color:#fff}
+    select{background:#1e293b;color:#fff}
+    button{background:#60a5fa;border:none;color:#03233b;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.2);color:#9aa4b2}
+    ul{list-style:none;padding:0;margin-top:16px}
+    li{background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+    .meta{font-size:13px;color:#9aa4b2}
+  </style>
 </head>
 <body>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <h1 class="cosmos-logo">Endless Realities</h1>
-        <div class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-        </div>
+  <div class="container">
+    <h1>AI Reminder</h1>
+    <div class="card">
+      <div class="row">
+        <input id="date" type="date">
+        <input id="time" type="time">
+      </div>
+      <div class="row">
+        <input id="purpose" type="text" placeholder="Purpose (e.g. Drink water)">
+      </div>
+      <div class="row">
+        <select id="repeat">
+          <option value="none">Once</option>
+          <option value="daily">Daily</option>
+          <option value="every2h">Every 2 hours</option>
+          <option value="every4h">Every 4 hours</option>
+          <option value="every6h">Every 6 hours</option>
+        </select>
+      </div>
+      <div class="row">
+        <button id="add">Add Reminder</button>
+        <button class="ghost" id="clearAll">Clear All</button>
+      </div>
+      <ul id="list"></ul>
     </div>
+  </div>
 
-    <header>
-        <!-- Smooth Scrolling Navigation Bar -->
-        <a href="#home" class="logo">Daksh</a>
+  <script>
+    const dateInput = document.getElementById('date')
+    const timeInput = document.getElementById('time')
+    const purposeInput = document.getElementById('purpose')
+    const repeatInput = document.getElementById('repeat')
+    const addBtn = document.getElementById('add')
+    const clearAllBtn = document.getElementById('clearAll')
+    const listEl = document.getElementById('list')
 
-        <nav>
-            <a href="#home" class="active">Home</a>
-            <a href="#services">Services</a>
-            <a href="#skills">Skills</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+    let reminders = []
+    let timers = {}
 
-    <!-- Home Section -->
-    <section id="home" class="home">
-        <div class="home-img">
-            <img src="images.jpeg" alt="">
+    function uid(){return Math.random().toString(36).slice(2,9)}
+    function save(){ localStorage.setItem('reminders_v2', JSON.stringify(reminders)) }
+    function load(){ reminders = JSON.parse(localStorage.getItem('reminders_v2')||'[]') }
+
+    async function ensureNotifications(){
+      if(!('Notification' in window)) return alert('Notifications not supported')
+      if(Notification.permission==='default') await Notification.requestPermission()
+    }
+
+    function msToWhen(ms){ return new Date(ms).toLocaleString() }
+
+    function schedule(rem){
+      if(timers[rem.id]) clearTimeout(timers[rem.id])
+      let now = Date.now(), delay = rem.time - now
+      if(delay<0){
+        if(rem.repeat==='daily') rem.time+=24*3600000
+        else if(rem.repeat.startsWith('every')){
+          let hours=parseInt(rem.repeat.replace(/\D/g,''))
+          rem.time+=hours*3600000
+        } else { rem.enabled=false; save(); render(); return }
+        delay = rem.time-now
+      }
+      timers[rem.id] = setTimeout(()=>showReminder(rem), delay)
+    }
+
+    function showReminder(rem){
+      if(Notification.permission==='granted') new Notification(rem.purpose,{body:rem.purpose,tag:rem.id})
+      else alert(rem.purpose)
+
+      if(rem.repeat==='daily') rem.time+=24*3600000
+      else if(rem.repeat.startsWith('every')){
+        let hours=parseInt(rem.repeat.replace(/\D/g,''))
+        rem.time+=hours*3600000
+      } else rem.enabled=false
+      save(); render(); schedule(rem)
+    }
+
+    function render(){
+      listEl.innerHTML=''
+      reminders.filter(r=>r.enabled!==false).sort((a,b)=>a.time-b.time).forEach(r=>{
+        const li=document.createElement('li')
+        li.innerHTML=`<div>
+          <div><strong>${r.purpose}</strong></div>
+          <div class="meta">${msToWhen(r.time)} • ${r.repeat}</div>
         </div>
-        <div class="home-content">
-            <h1>Hi, It's <span>Daksh</span></h1>
-            <h3 class="typing-text">I'm a <span></span></h3>
-            <p>Hey there! I’m Daksh Saxena, a passionate student with a dream of becoming a Computer Science engineer...</p>
-            <div class="social-icons">
-                <a href="https://github.com/LegendDakshGamer"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.instagram.com/ayonakoji_daksh/?hl=en"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <a href="#contact" class="btn">Contact Me</a>
-        </div>
-    </section>
+        <button class="ghost" onclick="cancelReminder('${r.id}')">Cancel</button>`
+        listEl.appendChild(li)
+      })
+    }
 
-    <!-- Services Section -->
-    <section id="services" class="slide-in-left">
-        <h2>Services</h2>
-        <p>Details about the services I offer.</p>
-    </section>
+    function cancelReminder(id){
+      reminders=reminders.map(r=>r.id===id?{...r,enabled:false}:r)
+      save(); render()
+      if(timers[id]){clearTimeout(timers[id]); delete timers[id]}
+    }
 
-    <!-- Skills Section -->
-    <section id="skills" class="slide-in-right">
-        <h2>Skills</h2>
-        <p>Details about my skills.</p>
-    </section>
+    addBtn.addEventListener('click',()=>{
+      const date=dateInput.value,time=timeInput.value,purpose=purposeInput.value.trim(),repeat=repeatInput.value
+      if(!date||!time||!purpose) return alert('Fill all fields')
+      const [y,m,d]=date.split('-').map(Number)
+      const [hh,mm]=time.split(':').map(Number)
+      const dt=new Date(y,m-1,d,hh,mm,0,0)
+      const rem={id:uid(),purpose,time:dt.getTime(),repeat,enabled:true}
+      reminders.push(rem); save(); render(); schedule(rem)
+      purposeInput.value=''
+    })
 
-    <!-- Education Section -->
-    <section id="education" class="slide-in-left">
-        <h2>Education</h2>
-        <p>Details about my education background.</p>
-    </section>
+    clearAllBtn.addEventListener('click',()=>{
+      if(confirm('Clear all reminders?')){reminders=[];save();render();Object.values(timers).forEach(t=>clearTimeout(t));timers={}}
+    })
 
-    <!-- Experience Section -->
-    <section id="experience" class="slide-in-right">
-        <h2>Experience</h2>
-        <p>Details about my work experience.</p>
-    </section>
+    ;(async function init(){
+      await ensureNotifications();
+      load(); render();
+      reminders.filter(r=>r.enabled!==false).forEach(schedule)
+    })()
 
-    <!-- Contact Section -->
-    <section id="contact" class="slide-in-left">
-        <h2>Contact Me</h2>
-        <p>Get in touch through my contact information.</p>
-    </section>
-
-    <footer>
-        <p>&copy; <span id="year"></span> Daksh. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Set the current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Loading screen fade out
-        window.addEventListener('load', () => {
-            const loadingScreen = document.querySelector('.loading-screen');
-            setTimeout(() => {
-                loadingScreen.style.transition = 'opacity 2.5s ease';
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 2500);
-            }, 2000);
-        });
-
-        // Intersection Observer to trigger fade-in animations on scroll
-        const sections = document.querySelectorAll('section');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-
+    window.cancelReminder=cancelReminder
+  </script>
 </body>
 </html>
