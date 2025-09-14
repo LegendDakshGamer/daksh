@@ -1,164 +1,90 @@
-<!-- file: index.html
-AI Reminder — Dial-based UI version (improved)
-
-Features:
-- Pick date and time from inputs
-- Enter purpose separately
-- Choose repeat (once, daily, every X hours)
-- Stores reminders in localStorage
-- Browser notifications at chosen times
-
-Usage:
-1. Save as index.html and open in Chrome/Edge/Brave
-2. Allow notifications
-3. Fill in date, time, purpose, repeat → Add Reminder
-4. See upcoming reminders list, cancel if needed
-
-Limitations:
-- Works while browser is open (background tabs OK). Cross-device push needs Firebase/service worker.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI Reminder — Dial UI</title>
-  <style>
-    body{font-family:Inter,system-ui;background:linear-gradient(180deg,#0f1724 0%,#081428 100%);color:#e6eef8;margin:0;padding:20px}
-    .container{max-width:700px;margin:0 auto}
-    h1{text-align:center;margin-bottom:20px;font-size:24px}
-    .card{background:rgba(255,255,255,0.05);padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-    input,select{flex:1;padding:10px;border-radius:8px;border:none;font-size:15px}
-    input[type=date],input[type=time]{background:#1e293b;color:#fff}
-    input[type=text]{background:#1e293b;color:#fff}
-    select{background:#1e293b;color:#fff}
-    button{background:#60a5fa;border:none;color:#03233b;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600}
-    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.2);color:#9aa4b2}
-    ul{list-style:none;padding:0;margin-top:16px}
-    li{background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-    .meta{font-size:13px;color:#9aa4b2}
-  </style>
+  <title>AI Reminder</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0b1020" />
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>AI Reminder</h1>
-    <div class="card">
-      <div class="row">
-        <input id="date" type="date">
-        <input id="time" type="time">
+  <main class="app">
+    <header class="top-card">
+      <div class="logo">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect x="2" y="2" width="20" height="20" rx="4" fill="#0f1724"/>
+          <path d="M7 14l3-3 3 3 5-5" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="row">
-        <input id="purpose" type="text" placeholder="Purpose (e.g. Drink water)">
+      <div class="title">
+        <h1>AI Reminder</h1>
+        <p class="muted">Simple, modern reminders — runs fully in your browser</p>
       </div>
-      <div class="row">
-        <select id="repeat">
-          <option value="none">Once</option>
-          <option value="daily">Daily</option>
-          <option value="every2h">Every 2 hours</option>
-          <option value="every4h">Every 4 hours</option>
-          <option value="every6h">Every 6 hours</option>
-        </select>
+    </header>
+
+    <section class="card form-card">
+      <div class="form-grid">
+        <label>
+          <span>Purpose</span>
+          <input id="purpose" type="text" placeholder="What do you want to remember?" maxlength="120" />
+        </label>
+
+        <label>
+          <span>Date</span>
+          <input id="date" type="date" />
+        </label>
+
+        <label>
+          <span>Time</span>
+          <input id="time" type="time" />
+        </label>
+
+        <label>
+          <span>Repeat</span>
+          <select id="repeat">
+            <option value="once">Once</option>
+            <option value="daily">Daily</option>
+            <option value="2h">Every 2h</option>
+            <option value="4h">Every 4h</option>
+            <option value="6h">Every 6h</option>
+          </select>
+        </label>
       </div>
-      <div class="row">
-        <button id="add">Add Reminder</button>
-        <button class="ghost" id="clearAll">Clear All</button>
+
+      <div class="actions">
+        <button id="addBtn" class="primary">Add Reminder</button>
+        <button id="requestPerm" class="ghost">Enable Notifications</button>
       </div>
-      <ul id="list"></ul>
-    </div>
-  </div>
+      <p class="hint muted">Notifications require permission — you'll be asked once.</p>
+    </section>
 
-  <script>
-    const dateInput = document.getElementById('date')
-    const timeInput = document.getElementById('time')
-    const purposeInput = document.getElementById('purpose')
-    const repeatInput = document.getElementById('repeat')
-    const addBtn = document.getElementById('add')
-    const clearAllBtn = document.getElementById('clearAll')
-    const listEl = document.getElementById('list')
+    <section class="card list-card">
+      <h2>Upcoming Reminders</h2>
+      <ul id="reminderList" class="reminder-list"></ul>
+      <p id="empty" class="muted" style="text-align:center">No upcoming reminders — add one above ✨</p>
+    </section>
 
-    let reminders = []
-    let timers = {}
+    <footer class="foot muted">Made with 🔨🤖🔧 — installable PWA • Works offline</footer>
+  </main>
 
-    function uid(){return Math.random().toString(36).slice(2,9)}
-    function save(){ localStorage.setItem('reminders_v2', JSON.stringify(reminders)) }
-    function load(){ reminders = JSON.parse(localStorage.getItem('reminders_v2')||'[]') }
-
-    async function ensureNotifications(){
-      if(!('Notification' in window)) return alert('Notifications not supported')
-      if(Notification.permission==='default') await Notification.requestPermission()
-    }
-
-    function msToWhen(ms){ return new Date(ms).toLocaleString() }
-
-    function schedule(rem){
-      if(timers[rem.id]) clearTimeout(timers[rem.id])
-      let now = Date.now(), delay = rem.time - now
-      if(delay<0){
-        if(rem.repeat==='daily') rem.time+=24*3600000
-        else if(rem.repeat.startsWith('every')){
-          let hours=parseInt(rem.repeat.replace(/\D/g,''))
-          rem.time+=hours*3600000
-        } else { rem.enabled=false; save(); render(); return }
-        delay = rem.time-now
-      }
-      timers[rem.id] = setTimeout(()=>showReminder(rem), delay)
-    }
-
-    function showReminder(rem){
-      if(Notification.permission==='granted') new Notification(rem.purpose,{body:rem.purpose,tag:rem.id})
-      else alert(rem.purpose)
-
-      if(rem.repeat==='daily') rem.time+=24*3600000
-      else if(rem.repeat.startsWith('every')){
-        let hours=parseInt(rem.repeat.replace(/\D/g,''))
-        rem.time+=hours*3600000
-      } else rem.enabled=false
-      save(); render(); schedule(rem)
-    }
-
-    function render(){
-      listEl.innerHTML=''
-      reminders.filter(r=>r.enabled!==false).sort((a,b)=>a.time-b.time).forEach(r=>{
-        const li=document.createElement('li')
-        li.innerHTML=`<div>
-          <div><strong>${r.purpose}</strong></div>
-          <div class="meta">${msToWhen(r.time)} • ${r.repeat}</div>
+  <template id="reminderItemTmpl">
+    <li class="reminder">
+      <div class="left">
+        <div class="purpose"></div>
+        <div class="meta muted"></div>
+      </div>
+      <div class="right">
+        <div class="repeat muted small"></div>
+        <div class="controls">
+          <button class="cancel">Cancel</button>
         </div>
-        <button class="ghost" onclick="cancelReminder('${r.id}')">Cancel</button>`
-        listEl.appendChild(li)
-      })
-    }
+      </div>
+    </li>
+  </template>
 
-    function cancelReminder(id){
-      reminders=reminders.map(r=>r.id===id?{...r,enabled:false}:r)
-      save(); render()
-      if(timers[id]){clearTimeout(timers[id]); delete timers[id]}
-    }
-
-    addBtn.addEventListener('click',()=>{
-      const date=dateInput.value,time=timeInput.value,purpose=purposeInput.value.trim(),repeat=repeatInput.value
-      if(!date||!time||!purpose) return alert('Fill all fields')
-      const [y,m,d]=date.split('-').map(Number)
-      const [hh,mm]=time.split(':').map(Number)
-      const dt=new Date(y,m-1,d,hh,mm,0,0)
-      const rem={id:uid(),purpose,time:dt.getTime(),repeat,enabled:true}
-      reminders.push(rem); save(); render(); schedule(rem)
-      purposeInput.value=''
-    })
-
-    clearAllBtn.addEventListener('click',()=>{
-      if(confirm('Clear all reminders?')){reminders=[];save();render();Object.values(timers).forEach(t=>clearTimeout(t));timers={}}
-    })
-
-    ;(async function init(){
-      await ensureNotifications();
-      load(); render();
-      reminders.filter(r=>r.enabled!==false).forEach(schedule)
-    })()
-
-    window.cancelReminder=cancelReminder
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
